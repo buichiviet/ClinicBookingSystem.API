@@ -16,10 +16,10 @@ namespace ClinicBookingSystem.API.Models
         public string Specialty { get; set; } = string.Empty; // Chuyên khoa
 
         [Required]
-        [Column(TypeName = "decimal(18,2)")] // Định dạng tiền tệ chuẩn SQL Server
+        [Column(TypeName = "decimal(18,2)")] // Định dạng tiền tệ
         public decimal Price { get; set; } // Giá khám
 
-        public string? Biography { get; set; } // Tiểu sử bác sĩ (có thể trống)
+        public string? Biography { get; set; } // Tiểu sử bác sĩ
 
         // Quan hệ liên kết ngược về bảng Users
         [ForeignKey("UserId")]

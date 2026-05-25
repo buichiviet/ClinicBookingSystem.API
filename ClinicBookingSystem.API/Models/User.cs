@@ -6,7 +6,7 @@ namespace ClinicBookingSystem.API.Models
 {
     public class User
     {
-        [Key] // Đánh dấu đây là Khóa chính
+        [Key] // Khóa chính
         public int Id { get; set; }
 
         [Required] // Bắt buộc phải nhập (Not Null)

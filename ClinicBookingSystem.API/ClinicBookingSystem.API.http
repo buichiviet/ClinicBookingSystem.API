@@ -1,6 +1,12 @@
-@ClinicBookingSystem.API_HostAddress = http://localhost:5079
+@hostname = https://localhost:7134
 
-GET {{ClinicBookingSystem.API_HostAddress}}/weatherforecast/
-Accept: application/json
+### 1. KIỂM THỬ API ĐĂNG KÝ TÀI KHOẢN NGƯỜI BỆNH (PATIENT)
+POST {{hostname}}/api/Auth/register
+Content-Type: application/json
 
-###
+{
+  "fullName": "Nguyen Van A",
+  "email": "nguyenvana@gmail.com",
+  "password": "MatKhauBaoMat123",
+  "role": "Patient"
+}
