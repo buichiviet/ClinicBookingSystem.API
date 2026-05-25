@@ -1,6 +1,6 @@
 @hostname = https://localhost:7134
 
-### 1. KIỂM THỬ API ĐĂNG KÝ TÀI KHOẢN NGƯỜI BỆNH (PATIENT)
+### 1. API ĐĂNG KÝ TÀI KHOẢN
 POST {{hostname}}/api/Auth/register
 Content-Type: application/json
 
@@ -11,7 +11,9 @@ Content-Type: application/json
   "role": "Patient"
 }
 
-### 2. KIỂM THỬ API ĐĂNG NHẬP (LOGIN)
+###
+
+### 2. API ĐĂNG NHẬP
 POST {{hostname}}/api/Auth/login
 Content-Type: application/json
 
@@ -20,3 +22,9 @@ Content-Type: application/json
   "password": "MatKhauBaoMat123"
 }
 
+###
+
+### 3. KIỂM THỬ API BẢO MẬT VÀ PHÂN QUYỀN
+# COPPY CHUỖI TOKEN DÀI NHẬN ĐƯỢC TỪ MỤC 2 DÁN THAY THẾ 
+GET {{hostname}}/api/Auth/test-auth
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJuZ3V5ZW52YW5hQGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlBhdGllbnQiLCJleHAiOjE3Nzk4MTAwNTQsImlzcyI6IkNsaW5pY0Jvb2tpbmdCYWNrZW5kIiwiYXVkIjoiQ2xpbmljQm9va2luZ0Zyb250ZW5kIn0.XbTIBR968JUth0fL1Txug2cWTJGlAwti5S8M0CY2VHw
