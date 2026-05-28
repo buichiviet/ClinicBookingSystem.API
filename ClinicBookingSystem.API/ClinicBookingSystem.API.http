@@ -28,11 +28,26 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hc
 ### 4. API TẠO LỊCH LÀM VIỆC (YÊU CẦU QUYỀN DOCTOR)
 # Lưu ý: Token hiện tại có Role = Patient, bấm lệnh này sẽ bị trả về mã 403 Forbidden (Hợp lý)
 POST {{hostname}}/api/Doctor/create-schedule
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJuZ3V5ZW52YW5hQGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlBhdGllbnQiLCJleHAiOjE3Nzk4MDY5NDMsImlzcyI6IkNsaW5pY0Jvb2tpbmdCYWNrZW5kIiwiYXVkIjoiQ2xpbmljQm9va2luZ0Zyb250ZW5kIn0.yZK9Jhovc2QV6xnIEW6L1s6iknpmnvqPy-1Y11FM7p4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb2N0b3JiQGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkRvY3RvciIsImV4cCI6MTc4MDA2MTMzNywiaXNzIjoiQ2xpbmljQm9va2luZ0JhY2tlbmQiLCJhdWQiOiJDbGluaWNCb29raW5nRnJvbnRlbmQifQ.pNcnYWaKVnVGkBHIxotqVPZVSa7PBAZzwkRuAiTHERU
 Content-Type: application/json
 
 {
   "doctorId": 1,
   "workDate": "2026-05-30",
   "timeSlot": "08:00 - 09:00"
+}
+
+### 5. API XEM LỊCH TRỐNG CỦA BÁC SĨ (MỌI NGƯỜI ĐỀU XEM ĐƯỢC)
+GET {{hostname}}/api/Patient/available-schedules
+
+### 6. API ĐẶT LỊCH KHÁM & XUẤT LINK VNPAY (YÊU CẦU TOKEN PATIENT)
+# Nhớ dán lại mã Token quyền Patient (Của tài khoản Nguyen Van A ở chương trước) vào đây
+POST {{hostname}}/api/Patient/book-appointment
+Authorization: Bearer DÁN_TOKEN_PATIENT_CỦA_BẠN_VÀO_ĐÂY
+Content-Type: application/json
+
+{
+  "patientId": 1,
+  "scheduleId": 1,
+  "notes": "Tôi bị đau răng khôn mấy ngày hôm nay"
 }

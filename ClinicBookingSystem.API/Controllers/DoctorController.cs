@@ -18,6 +18,38 @@ namespace ClinicBookingSystem.API.Controllers
             _context = context;
         }
 
+        // =========================================================================
+        // API MỒI DỮ LIỆU CHUYÊN MÔN BÁC SĨ (POST: api/Doctor/seed-doctor-profile - CHẠY 1 LẦN)
+        // =========================================================================
+        [HttpPost("seed-doctor-profile")]
+        public async Task<IActionResult> SeedDoctorProfile()
+        {
+            // Tìm tài khoản User của bác sĩ B vừa tạo ngầm ở bước trước
+            var userDoctor = await _context.Users.FirstOrDefaultAsync(u => u.Email == "doctorb@gmail.com");
+            if (userDoctor == null)
+            {
+                return NotFound(new { message = "Hãy chạy Mục 2 để đăng nhập tạo tài khoản bác sĩ trước!" });
+            }
+
+            // Kiểm tra nếu bác sĩ này chưa có hồ sơ trong bảng Doctors thì mới tạo
+            var isProfileExist = await _context.Doctors.AnyAsync(d => d.UserId == userDoctor.Id);
+            if (!isProfileExist)
+            {
+                var newDoctorProfile = new Doctor
+                {
+                    UserId = userDoctor.Id,
+                    Specialty = "Nha Khoa",
+                    Price = 500000,
+                    Biography = "Chuyên gia răng hàm mặt với 10 năm kinh nghiệm."
+                };
+                _context.Doctors.Add(newDoctorProfile);
+                await _context.SaveChangesAsync();
+            }
+
+            var doctorInfo = await _context.Doctors.FirstOrDefaultAsync(d => d.UserId == userDoctor.Id);
+            return Ok(new { message = "Khởi tạo hồ sơ Bác sĩ thành công!", doctorRealId = doctorInfo!.Id });
+        }
+
         // API ĐĂNG KÝ KHUNG GIỜ LÀM VIỆC CỦA BÁC SĨ (POST: api/Doctor/create-schedule)
         [HttpPost("create-schedule")]
         public async Task<IActionResult> CreateSchedule([FromBody] CreateScheduleDto model)
